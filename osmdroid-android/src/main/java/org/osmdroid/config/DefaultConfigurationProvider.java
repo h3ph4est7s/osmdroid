@@ -66,6 +66,7 @@ public class DefaultConfigurationProvider implements IConfigurationProvider {
     protected long mTileGCBulkPauseInMillis = 500;
     protected boolean mTileDownloaderFollowRedirects = true;
     protected boolean enforceTileSystemBounds = false;
+    protected boolean mHTTPCaching = true;
 
     /**
      * @since 6.1.0
@@ -371,6 +372,7 @@ public class DefaultConfigurationProvider implements IConfigurationProvider {
             setCacheMapTileOvershoot((short) (prefs.getInt("osmdroid.cacheTileOvershoot", cacheTileOvershoot)));
             setMapTileDownloaderFollowRedirects(prefs.getBoolean("osmdroid.TileDownloaderFollowRedirects", mTileDownloaderFollowRedirects));
             setEnforceTileSystemBounds(prefs.getBoolean("osmdroid.enforceTileSystemBounds", false));
+            setHTTPCaching(prefs.getBoolean("osmdroid.HTTPCaching", mHTTPCaching));
             if (prefs.contains("osmdroid.ExpirationOverride")) {
                 expirationOverride = prefs.getLong("osmdroid.ExpirationOverride", -1);
                 if (expirationOverride != null && expirationOverride == -1)
@@ -432,6 +434,7 @@ public class DefaultConfigurationProvider implements IConfigurationProvider {
         edit.putBoolean("osmdroid.mapViewRecycler", mapViewRecycler);
         edit.putInt("osmdroid.cacheTileOvershoot", cacheTileOvershoot);
         edit.putBoolean("osmdroid.enforceTileSystemBounds", enforceTileSystemBounds);
+        edit.putBoolean("osmdroid.HTTPCaching", mHTTPCaching);
         commit(edit);
     }
 
@@ -606,6 +609,12 @@ public class DefaultConfigurationProvider implements IConfigurationProvider {
     public void setEnforceTileSystemBounds(boolean mValue) {
         enforceTileSystemBounds = mValue;
     }
+
+    @Override
+    public boolean isHTTPCaching() { return mHTTPCaching; }
+
+    @Override
+    public void setHTTPCaching(boolean value) { mHTTPCaching = value; }
 
     /**
      * @since 6.1.0

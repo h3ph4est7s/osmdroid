@@ -512,4 +512,19 @@ public interface IConfigurationProvider {
      * @param mValue
      */
     void setEnforceTileSystemBounds(boolean mValue);
+
+    /**
+     * If true the HTTP caching is enabled. HTTP caching is not always welcome in security oriented application due to the fact that it allows
+     * potential data to be kept unencrypted in a cache.
+     *
+     * @since 6.1.17
+     */
+    boolean isHTTPCaching();
+
+    /**
+     * See {@link #isHTTPCaching()}.
+     * @since 6.1.17
+     * @param value
+     */
+    void setHTTPCaching(boolean value);
 }

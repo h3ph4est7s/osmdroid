@@ -103,7 +103,7 @@ public class TileDownloader {
             } else {
                 c = (HttpURLConnection) new URL(tileURLString).openConnection();
             }
-            c.setUseCaches(true);
+            c.setUseCaches(Configuration.getInstance().isHTTPCaching());
             c.setRequestProperty(Configuration.getInstance().getUserAgentHttpHeader(), userAgent);
             for (final Map.Entry<String, String> entry : Configuration.getInstance().getAdditionalHttpRequestProperties().entrySet()) {
                 c.setRequestProperty(entry.getKey(), entry.getValue());
